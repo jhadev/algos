@@ -125,6 +125,7 @@ const prettyJoinIterative = (arr, string) => {
   // stop at second to last index
   for (let i = 0; i < arr.length - 1; i += 1) {
     resultSoFar += arr[i] + string;
+    console.log(resultSoFar);
   }
 
   return resultSoFar + arr[arr.length - 1];

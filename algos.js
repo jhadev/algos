@@ -35,7 +35,7 @@ const isUnique = arr => {
 
 // linear O(n)
 
-// my answer
+// best solution
 const uniqSort = arr => {
   arr = Array.from(new Set(arr));
   return arr.sort((a, b) => a - b);

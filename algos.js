@@ -127,17 +127,23 @@ console.log(memoizeTen(20, 5));
 
 const multiplier = (num1, num2) => num1 * num2;
 // can use multiplier func above takes 2 args
-const memoize = callback => {
+const memoizeArgs = callback => {
   let cache = {};
   return (...args) => {
-    if (args[0] in cache) {
-      console.log('Retrieving from cache', args[0]);
-      return cache[args[0]];
+    let [num1, num2] = args;
+    if (num1 in cache) {
+      console.log('Retrieving from cache', num1);
+      return cache[num1];
     } else {
       console.log('Result saved in cache');
-      let result = callback(args[0], args[1]);
-      cache[args[0]] = result;
+      let result = callback(num1, num2);
+      cache[num1] = result;
       return result;
     }
   };
 };
+
+const memoizeTwoArgs = memoizeArgs(multiplier);
+
+console.log(memoizeTwoArgs(10, 10));
+console.log(memoizeTwoArgs(10, 10));

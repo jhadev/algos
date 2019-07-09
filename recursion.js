@@ -54,11 +54,6 @@ const recursiveFactorial = num => {
 
 console.log(recursiveFactorial(5));
 
-// const recursiveMerge = arr => {
-
-// }
-// console.log(recursiveMerge([[5, 5, 5], [2, 3, 4]]));
-
 const logNumbersIteration = (start, end) => {
   console.log(`looping from ${start} until ${end}`);
 
@@ -213,5 +208,62 @@ const binarySearch = (arr, item) => {
 };
 
 console.log(binarySearch([1, 5, 7, 17, 19, 42, 109], 42));
+
+// eek not performant
+const iterativeShallowMerge = arr => {
+  const merged = [];
+  arr.forEach(innerArr => {
+    innerArr.forEach(item => {
+      merged.push(item);
+    });
+  });
+
+  return merged;
+};
+console.log(iterativeShallowMerge([[5, 5, 5], [2, 3, 4], [8, 4, 3]]));
+
+// eeker not performant
+const iterativeDeeperMerge = arr => {
+  const merged = [];
+  arr.forEach(inner => {
+    inner.forEach(item => {
+      if (Array.isArray(item)) {
+        let deeper = item;
+        deeper.forEach(value => {
+          merged.push(value);
+        });
+      } else {
+        merged.push(item);
+      }
+    });
+  });
+
+  return merged;
+};
+
+console.log(iterativeDeeperMerge([[5, 6, 4, [8, 4, 3]], [4, 5, 6]]));
+
+// eek big mess
+let merged = [];
+
+const recursiveMergeWithLoop = (arr, index) => {
+  let max = arr.length - 1;
+  console.log('index ===', arr[index]);
+  if (Array.isArray(arr[index])) {
+    arr[index].forEach(item => {
+      merged.push(item);
+    });
+  } else {
+    merged.push(arr[index]);
+  }
+  if (index === max) {
+    return merged;
+  }
+  return recursiveMergeWithLoop(arr, index + 1);
+};
+
+console.log(
+  recursiveMergeWithLoop([1, 2, 4, [4, 6, 43, 39], 5, 5, [2, 4, 5]], 0)
+);
 
 // to be continued

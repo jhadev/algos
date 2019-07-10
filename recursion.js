@@ -191,7 +191,7 @@ const binarySearch = (arr, item) => {
     // divide
     guess = Math.floor((min + max) / 2);
     console.log(guess);
-    // if arr at index of guess is equal to item passed in exit
+    // if arr at index of guess is equal to item passed in- exit
     if (arr[guess] === item) {
       return guess;
       // grow min and shrink max until found
@@ -226,6 +226,7 @@ console.log(iterativeShallowMerge([[5, 5, 5], [2, 3, 4], [8, 4, 3]]));
 const iterativeDeeperMerge = arr => {
   const merged = [];
   arr.forEach(inner => {
+    // assumes inner is an array already
     inner.forEach(item => {
       if (Array.isArray(item)) {
         let deeper = item;
@@ -265,5 +266,63 @@ const recursiveMergeWithLoop = (arr, index) => {
 console.log(
   recursiveMergeWithLoop([1, 2, 4, [4, 6, 43, 39], 5, 5, [2, 4, 5]], 0)
 );
+
+const altRecursiveLoop = arr => {
+  const max = arr.length - 1;
+
+  const repeat = index => {
+    console.log(`hitting index ${index} === ${arr[index]}`);
+    // exit condition
+    if (index === max) {
+      return 'loop finished';
+    }
+
+    return repeat(index + 1);
+  };
+  // only starts at first index
+  return repeat(0);
+};
+
+console.log(altRecursiveLoop([5, 6, 7, 8, 9, 10]));
+
+// in progress
+// this kinda works exit conditions stops after first nested array
+const recurseMerge = arr => {
+  const merged = [];
+  const max = arr.length - 1;
+
+  const recurse = index => {
+    // if the arr at current index is an array run loop inner recursively
+    if (Array.isArray(arr[index])) {
+      const max = arr[index].length - 1;
+
+      const loopInner = secondIndex => {
+        merged.push(arr[index][secondIndex]);
+
+        if (secondIndex === max) {
+          // this stops after first array is found
+          return merged;
+        }
+
+        return loopInner(secondIndex + 1);
+      };
+
+      return loopInner(0);
+    } else {
+      merged.push(arr[index]);
+    }
+
+    if (index === max) {
+      return merged;
+    }
+
+    return recurse(index + 1);
+  };
+
+  return recurse(0);
+};
+
+// does not work if inner array is before the other items. Needs alot of work.
+console.log(recurseMerge([13, 4, 5, [3, 6, 7]]));
 
 // to be continued

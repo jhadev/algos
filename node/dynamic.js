@@ -31,7 +31,9 @@ const makeChange = (arr, total) => {
   return globalCache[total];
 };
 
-trace(makeChange([10, 6, 1], 12));
+trace(makeChange(coins, 12));
+
+/* ========================================================================= */
 
 const memoize = callback => {
   let cache = {};
@@ -49,31 +51,8 @@ const memoize = callback => {
   };
 };
 
-// doesn't work yet
-const memoizeMakeChange = memoize((arr, total) => {
-  let cache = {};
+// local cache
+const makeChangeMemoized = memoize(makeChange);
 
-  if (cache[total]) {
-    trace('retrieved from cache');
-    return cache[total];
-  }
-
-  let minCoins = -1;
-
-  // loop
-  arr.forEach(item => {
-    if (total - item >= 0) {
-      let currentMinCoins = makeChange(arr, total - item);
-      if (minCoins === -1 || currentMinCoins < minCoins) {
-        minCoins = currentMinCoins;
-      }
-    }
-  });
-
-  // save to cache
-  cache[total] = minCoins + 1;
-  console.log(cache);
-  return cache[total];
-});
-
-trace(memoizeMakeChange(coins, 12));
+trace(makeChangeMemoized(coins, 12));
+trace(makeChangeMemoized(coins, 12));

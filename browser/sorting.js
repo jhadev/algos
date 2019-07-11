@@ -17,7 +17,7 @@
 // shift the array with the lower value
 
 // repeat until both arrays are empty
-const numList = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
+const numList = [9, 2, 5, 6, 18, 54, 74, 23, 4, 3, 7, 10, 1, 8];
 // split array into halves and merge them recursively
 const mergeSort = arr => {
   if (arr.length === 1) {
@@ -57,7 +57,9 @@ const merge = (left, right) => {
 
   let leftSlice = left.slice(indexLeft);
   let rightSlice = right.slice(indexRight);
+
   // concat result
+  // console.log([...result, ...leftSlice, ...rightSlice]);
   return result.concat(leftSlice).concat(rightSlice);
 };
 

@@ -35,6 +35,7 @@ const isUnique = arr => {
   return result;
 };
 
+trace(isUnique([1, 4, 5, 9, 4, 8, 8, 10, 1]));
 // linear O(n)
 
 // best solution
@@ -64,6 +65,8 @@ const uniqSortCache = arr => {
   // is nlogn
   return result.sort((a, b) => a - b);
 };
+
+trace(uniqSortCache([1, 4, 5, 9, 4, 8, 8, 10, 1]));
 
 const timesTen = num => num * 10;
 

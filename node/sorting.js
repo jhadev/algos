@@ -60,6 +60,7 @@ const merge = (left, right) => {
   let leftSlice = left.slice(indexLeft);
   let rightSlice = right.slice(indexRight);
   // concat result
+  // console.log([...result, ...leftSlice, ...rightSlice]);
   return result.concat(leftSlice).concat(rightSlice);
 };
 
@@ -77,10 +78,7 @@ const someSort = arr => {
     outerCount += 1;
     for (let j = 0; j < arr.length; j++) {
       innerCount += 1;
-      if (arr[i] < arr[j]) {
-        swapCount += 1;
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
+      console.log(`array at i ${arr[i]} ------ array at j ${arr[j]}`);
     }
   }
   trace(
@@ -104,9 +102,8 @@ const bubbleSort = arr => {
 
   for (let i = 0; i < arr.length; i++) {
     outerCount += 1;
-    for (let j = 1; j < arr.length; j++) {
+    for (let j = 0; j < arr.length; j++) {
       innerCount += 1;
-
       if (arr[j - 1] > arr[j]) {
         swapCount += 1;
         swap(arr, j - 1, j);

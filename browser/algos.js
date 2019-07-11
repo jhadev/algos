@@ -147,3 +147,20 @@ const memoizeTwoArgs = memoizeArgs(multiplier);
 
 console.log(memoizeTwoArgs(10, 10));
 console.log(memoizeTwoArgs(10, 10));
+
+let anotherCache = {};
+
+const memoizeCacheCurried = callback => (num1, num2) => {
+  if (num1 in anotherCache) {
+    console.log('Retrieving from anotherCache', num1);
+    return anotherCache[num1];
+  } else {
+    console.log('Result saved in anotherCache');
+    let result = callback(num1, num2);
+    anotherCache[num1] = result;
+    return result;
+  }
+};
+
+console.log(memoizeCacheCurried(multiplier)(10, 15));
+console.log(memoizeCacheCurried(multiplier)(10, 15));

@@ -1,5 +1,3 @@
-// call stack game
-
 let tracker = 0;
 
 const callMe = str => {
